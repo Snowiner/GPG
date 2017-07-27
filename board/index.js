@@ -9,7 +9,7 @@ var passport = require("./config/passport");
 var app = express();
 
 //DB setting
-mongoose.connect(`mongodb://admin:1qkqtkd1@ds157712.mlab.com:57712/yelindata`, { useMongoClient: true });
+mongoose.connect(process.env["MONGO_DB"], { useMongoClient: true });
 var db = mongoose.connection;
 db.once("open", function(){
   console.log("DB connected");
