@@ -6,7 +6,7 @@ var methodOverride = require("method-override");
 var app = express();
 
 //DB setting
-mongoose.connect(process.env.MONGO_DB, { useMongoClient: true });
+mongoose.connect(`mongodb://admin:1qkqtkd1@ds157712.mlab.com:57712/yelindata`, { useMongoClient: true });
 var db = mongoose.connection;
 db.once("open", function(){
   console.log("DB connected");
