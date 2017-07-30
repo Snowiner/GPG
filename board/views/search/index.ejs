@@ -5,17 +5,32 @@
   </head>
   <body>
     <% include ../partials/nav %>
-    <div class="home-search">
+    <div class="container user user-index">
       <form action="/search" method="post">
       <h3>Search</h3>
           <div class="search-bar">
             <label for="search_target">Username</label>
             <br>
-            <input type="text" id="search_target" name="search_target" value="<%= search_target %>">
+            <input type="text" id="search_target" name="search_target">
             <input class="btn-next" type="submit" value="Search">
           </div>
-      <P>구현중입니다.</P>
       </form>
     </div>
+
+    <div class="container user user-index">
+
+      <div class="contentBox">
+        <h3 class="contentBoxTop">Users</h3>
+        <ul class="floats">
+          <% if(list == null || list.length == 0){ %>
+            <div class="noData" colspan=100> There is no user yet.</div>
+          <% } %>
+          <% list.forEach(function(user) { %>
+            <li>
+              <a href="../users/<%= user.username %>"><%= user.username %></a>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
   </body>
 </html>
