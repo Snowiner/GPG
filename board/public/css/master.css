@@ -2,6 +2,11 @@
 .buttons form{
   display: inline-block;
 }
+
+.btn-next form{
+  width:30px;
+  display:inline;
+}
 /* home style */
 .home h1{
   color: darkseagreen;
@@ -10,6 +15,16 @@
   max-width: 330px;
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
+}
+.home-search{
+  width: 130px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  display:inline;
+}
+.search-bar{
+  width:630px;
+  display:block;
 }
 /* post style */
 .post h2 {

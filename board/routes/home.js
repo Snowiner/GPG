@@ -6,9 +6,18 @@ var passport = require("../config/passport");
 router.get("/", function(req, res){
   res.render("home/welcome");
 });
-router.get("/about", function(req, res){
-  res.render("home/about");
+router.get("/search", function(req, res){
+  var search_target = "";
+  res.render("home/search",{
+    search_target:search_target
+  });
 });
+
+//post search
+router.post("/search", function(req,res){
+  res.render("home/search",{
+    search_target:req.body.search_target});
+})
 
 //login
 router.get("/login", function(req,res){
