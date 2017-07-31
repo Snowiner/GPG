@@ -73,7 +73,7 @@ if( content_ === null){
 }
 else{
 
-  User.findOneAndUpdate({username:reciever},{$push:{"message":{sendFrom:req.user._id,content:content_}}}, {safe: true, upsert: true, new : true},function(err, post){
+  User.findOneAndUpdate({username:reciever},{$push:{"message":{sendFrom:req.user.username,content:content_}}}, {safe: true, upsert: true, new : true},function(err, post){
     if(err) return res.json(err);
 
     res.render("message/sendingSuccess",{username_:reciever});
