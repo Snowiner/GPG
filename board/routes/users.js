@@ -53,6 +53,11 @@ router.get("/:username/edit", function(req, res){
  }
 });
 
+//check the message@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+router.get("/:username/checkmsg", function(req, res){
+ res.render("users/checkmsg");
+});
+
 
 //update //2
 router.put("/:username", function(req, res, next){
