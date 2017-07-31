@@ -4,7 +4,7 @@ var  server = require('http').createServer(app);
 var  io = require('socket.io').listen(server);
 var mongoose = require('mongoose');
 var users = {};
-server.listen(3000);
+server.listen(3003);
 
 mongoose.connect(process.env.MONGO_DB, function(err){
   if(err){
