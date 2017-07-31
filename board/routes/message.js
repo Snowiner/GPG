@@ -90,4 +90,8 @@ else{
 
 });
 
+router.post("/sendMsg",function(req,res){
+  res.render("message/sending",{username_:req.body.username_});
+});
+
 module.exports = router;

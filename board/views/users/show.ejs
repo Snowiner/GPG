@@ -15,8 +15,14 @@
     {%>
       <a class="btn btn-default" href="/users/<%= user.username %>/edit">Edit</a>
       <a class="btn btn-default" href="/users/<%= user.username %>/checkmsg">쪽지확인</a>
-    <%}%>
-    <%
+    <%}
+    else
+    {%>
+      <form action="/message/sendMsg" method="post">
+      <input type="hidden" name="username_" value="<%=user.username%>">
+      <input class="btn btn-default" type="submit" value="쪽지쓰기">
+      </form>
+    <%}
     if(user.id != watcher.id)
       if(friend=="false")
       {%>
