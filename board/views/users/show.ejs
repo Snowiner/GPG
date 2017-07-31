@@ -11,7 +11,8 @@
    <div class="buttons">
     <a class="btn btn-default" href="/users">Back</a>
     <a class="btn btn-default" href="/users/<%= user.username %>/edit">Edit</a>
-    <a class="btn btn-default">Add Friend</a>
+    <form action=href="/users/addFriend" method="post">
+      <input class="btn btn-default" type="submit" value="Add Friend">
    </div>
 
    <form class="user-form form-horizontal" action="/users" method="post">
@@ -42,7 +43,7 @@
 
         <ul class="floats">
           <% if(users == null || users.length == 0){ %>
-            <div class="noData" colspan=100> There is no user yet.</div>
+            <div class="noData" colspan=100> You Hav No FRIENDS XD</div>
           <% } %>
           <% users.forEach(function(user) { %>
             <li>

@@ -43,7 +43,15 @@ router.get("/:username", function(req, res){
     .sort({username:1})
     .exec(function(err, users){
       if(err) return res.json(err);
-      res.render("users/show", {user:user, users:users});
+
+      if(req.isAuthenticated())
+      {
+        res.render("users/show", {user:user, users:users, id:req.user._id});
+      }
+      else
+      {
+        res.redirect("/login");
+      }
     });
   });
 });
