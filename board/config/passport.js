@@ -1,6 +1,10 @@
 var passport = require("passport");
+var mongoose = require("mongoose");
 var LocalStrategy = require("passport-local").Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require("../models/User");
+var fUser = require("../models/facebook");
+
 
 //serialize & deserialize User
 passport.serializeUser(function(user, done){
@@ -36,4 +40,39 @@ function(req, username, password, done){
 }
 )
 );
+
+passport.use('facebook-login', new FacebookStrategy({
+  clientID : '260682471086328',
+  clientSecret : 'eca9128dc07f445a279d072eb78b7128',
+  callbackURL : 'http://localhost:3000/facebook/callback'
+}, function(accessToken, refreshToken, profile, done) {
+  console.log(profile);
+  process.nextTick(function() {
+    User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
+      if (err) return done(err);
+      console.log(fUser);
+      if (!fUser) {
+        console.log("yes");
+        return done(null, user);
+      } else {
+        console.log("no");
+        var newUser = new fUser();
+        console.log(profile.id);
+
+        newUser.facebook.id = profile.id;
+        newUser.facebook.token = token;
+        newUser.facebook.name = profile.name;
+        newUser.facebook.email = profile.email[0].value;
+
+        newUser.save(function(err) {
+          if (err) throw err;
+          return done(null, newUser);
+        });
+      }
+    });
+  });
+}));
+
+
+
 module.exports = passport;
