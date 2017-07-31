@@ -12,6 +12,39 @@
     <a class="btn btn-default" href="/users">Back</a>
     <a class="btn btn-default" href="/users/<%= user.username %>/checkmsg">쪽지확인</a>
 
+    <table class="table table-striped posts">
+      <thead>
+        <tr>
+          <th class="content">Content</th>
+          <th class="sender">Sender</th>
+          <th class="date">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if(user.message == null || user.message.length == 0){ %>
+          <tr>
+            <td class="noData" colspan=100> There is no data to show :( </td>
+          </tr>
+        <% } %>
+        <% user.message.forEach(function(message) { %>
+          <tr>
+            <td class="content">
+            <div><%= message.content %></div></a>
+            </td>
+            <td class="sender">
+              <%= message.sender %>
+            </td>
+            <td class="date">
+              <%= message.Date %>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+
+
+
 
 
  </body>
