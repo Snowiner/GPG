@@ -17,14 +17,10 @@ router.post("/addFriend",function(req,res){
     { $push: { 
       friends: 
       req.body.targetName
-      
     } },
     function(err,post)
     {
       if(err) return res.json(err);
-
-      console.log(req.user._id);
-      console.log(req.user.friends);
       res.redirect("/users/"+req.user.username);
     }
     );

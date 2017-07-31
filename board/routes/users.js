@@ -39,15 +39,10 @@ router.get("/:username", function(req, res){
     if(err) return res.json(err);
       if(req.isAuthenticated())
       {
-        console.log(req.user);
-        console.log(req.params.username);
-        console.log(req.user.friends.indexOf(req.params.username));
-        console.log(ifFriend);
         if(!req.user.friends.indexOf(req.params.username))
         {
            ifFriend = "true";
         }
-        console.log(ifFriend);
         res.render("users/show", {user:user, watcher:req.user, friend:ifFriend});
       }
       else
