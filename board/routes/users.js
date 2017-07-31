@@ -35,7 +35,16 @@ router.post("/", function(req, res){
 router.get("/:username", function(req, res){
   User.findOne({username:req.params.username}, function(err, user){
     if(err) return res.json(err);
-    res.render("users/show", {user:user});
+    User.find({
+      '_id':{ $in:user.friends}
+    }, function(err, docs){
+      console.log(docs);
+    })
+    .sort({username:1})
+    .exec(function(err, users){
+      if(err) return res.json(err);
+      res.render("users/show", {user:user, users:users});
+    });
   });
 });
 
