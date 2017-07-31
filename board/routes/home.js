@@ -14,7 +14,11 @@ router.get("/", function(req, res){
 router.post("/addFriend",function(req,res){
   User.update(
     { _id: req.user._id },
-    { $push: { friends: { friend: req.body.target, username:req.body.targetName} } },
+    { $push: { 
+      friends: 
+      req.body.targetName
+      
+    } },
     function(err,post)
     {
       if(err) return res.json(err);

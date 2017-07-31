@@ -29,10 +29,7 @@ var userSchema = Schema({
    match:[/^[a-zA-Z0-9,_%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/,"Should be a valid email address!"],
    trim:true
  },
- friends:[{
- friend:String,
- username:String
- }],
+ friends:[String],
  message:[{
   sendFrom:String,
   content:String,

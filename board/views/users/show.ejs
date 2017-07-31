@@ -11,20 +11,21 @@
    <div class="buttons">
     <a class="btn btn-default" href="/users">Back</a>
     <% 
-    if(user.id == id)
+    if(user.id == watcher.id)
     {%>
       <a class="btn btn-default" href="/users/<%= user.username %>/edit">Edit</a>
       <a class="btn btn-default" href="/users/<%= user.username %>/checkmsg">쪽지확인</a>
     <%}%>
     <%
-    if(user.id != id)
-    {%>
-      <form action="/addFriend" method="post">
-        <input type="hidden" name="target" value="<%= user.id %>">
-        <input type="hidden" name="targetName" value="<%= user.username %>">
-        <input class="btn btn-default" type="submit" value="Add Friend">
-      </form>
-    <%}%>
+    if(user.id != watcher.id)
+      if(friend=="false")
+      {%>
+        <form action="/addFriend" method="post">
+          <input type="hidden" name="target" value="<%= user.id %>">
+          <input type="hidden" name="targetName" value="<%= user.username %>">
+          <input class="btn btn-default" type="submit" value="Add Friend">
+        </form>
+      <%}%>
 
    </div>
 
@@ -60,7 +61,7 @@
           <% } %>
           <% user.friends.forEach(function(friend) { %>
             <li>
-              <a href="/users/<%= friend.username %>"><%= friend.username %></a>
+              <a href="/users/<%= friend %>"><%= friend %></a>
             </li>
           <% }) %>
         </ul>

@@ -34,12 +34,21 @@ router.post("/", function(req, res){
 
 //show
 router.get("/:username", function(req, res){
+  var ifFriend = "false";
   User.findOne({username:req.params.username}, function(err, user){
     if(err) return res.json(err);
       if(req.isAuthenticated())
       {
-        console.log(user.friends);
-        res.render("users/show", {user:user, id:req.user._id});
+        console.log(req.user);
+        console.log(req.params.username);
+        console.log(req.user.friends.indexOf(req.params.username));
+        console.log(ifFriend);
+        if(!req.user.friends.indexOf(req.params.username))
+        {
+           ifFriend = "true";
+        }
+        console.log(ifFriend);
+        res.render("users/show", {user:user, watcher:req.user, friend:ifFriend});
       }
       else
       {
