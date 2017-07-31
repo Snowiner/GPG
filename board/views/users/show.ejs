@@ -14,6 +14,7 @@
     if(user.id == id)
     {%>
       <a class="btn btn-default" href="/users/<%= user.username %>/edit">Edit</a>
+      <a class="btn btn-default" href="/users/<%= user.username %>/checkmsg">쪽지확인</a>
     <%}%>
     <%
     if(user.id != id)

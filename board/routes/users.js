@@ -48,6 +48,22 @@ router.get("/:username", function(req, res){
   });
 });
 
+//쪽지 확인창.
+router.get("/:username/checkmsg", function(req, res){
+
+  User.findOne({_id:req.user._id}, function(err, user){
+    if(err) return res.json(err);
+
+
+    res.render("users/checkmsg", {user:user});
+  });
+
+
+
+
+
+});
+
 //edit
 router.get("/:username/edit", function(req, res){
  var user = req.flash("user")[0];
