@@ -9,7 +9,10 @@ var passport = require("./config/passport");
 var app = express();
 
 //DB setting
-mongoose.connect(process.env.MONGO_DB, { useMongoClient: true });
+
+mongoose.connect(process.env.MONGO_DB,{useMongoClient: true});
+
+
 var db = mongoose.connection;
 db.once("open", function(){
   console.log("DB connected");
@@ -45,6 +48,7 @@ app.use("/", require("./routes/home"));
 app.use("/posts", require("./routes/posts"));
 app.use("/users", require("./routes/users"));
 app.use("/search", require("./routes/search"));
+app.use("/message", require("./routes/message"));
 
 //Port setting
 app.listen(3000, function(){
