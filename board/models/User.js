@@ -29,17 +29,15 @@ var userSchema = Schema({
    match:[/^[a-zA-Z0-9,_%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/,"Should be a valid email address!"],
    trim:true
  },
-<<<<<<< HEAD
  friends:[{
-  type: Schema.Types.ObjectId, ref:'User'
- }]
-=======
+ friend:String,
+ username:String
+ }],
  message:[{
   sendFrom:String,
   content:String,
   date:{type: Date, default: Date.now}
 }]
->>>>>>> master
 },{
  toObject:{virtuals:true}
 });

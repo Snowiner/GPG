@@ -36,24 +36,15 @@ router.post("/", function(req, res){
 router.get("/:username", function(req, res){
   User.findOne({username:req.params.username}, function(err, user){
     if(err) return res.json(err);
-    User.find({
-      '_id':{ $in:user.friends}
-    }, function(err, docs){
-      console.log(docs);
-    })
-    .sort({username:1})
-    .exec(function(err, users){
-      if(err) return res.json(err);
-
       if(req.isAuthenticated())
       {
-        res.render("users/show", {user:user, users:users, id:req.user._id});
+        console.log(user.friends);
+        res.render("users/show", {user:user, id:req.user._id});
       }
       else
       {
         res.redirect("/login");
       }
-    });
   });
 });
 

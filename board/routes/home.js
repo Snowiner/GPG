@@ -1,6 +1,9 @@
 var express = require("express");
 var router = express.Router();
 var passport = require("../config/passport");
+var User = require("../models/User");
+var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
 
 //home
 router.get("/", function(req, res){
@@ -9,9 +12,18 @@ router.get("/", function(req, res){
 
 //addFriend
 router.post("/addFriend",function(req,res){
-  var mID = req.user._id;
-  var fID = req.body.target;
-  res.send(mID+"<br>"+fID)
+  User.update(
+    { _id: req.user._id },
+    { $push: { friends: { friend: req.body.target, username:req.body.targetName} } },
+    function(err,post)
+    {
+      if(err) return res.json(err);
+
+      console.log(req.user._id);
+      console.log(req.user.friends);
+      res.redirect("/users/"+req.user.username);
+    }
+    );
 });
 
 //login

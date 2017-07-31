@@ -20,6 +20,7 @@
     {%>
       <form action="/addFriend" method="post">
         <input type="hidden" name="target" value="<%= user.id %>">
+        <input type="hidden" name="targetName" value="<%= user.username %>">
         <input class="btn btn-default" type="submit" value="Add Friend">
       </form>
     <%}%>
@@ -53,12 +54,12 @@
         <h3 class="contentBoxTop">Friends</h3>
 
         <ul class="floats">
-          <% if(users == null || users.length == 0){ %>
+          <% if(user.friends == null || user.friends.length == 0){ %>
             <div class="noData" colspan=100> <%= user.id %></div>
           <% } %>
-          <% users.forEach(function(user) { %>
+          <% user.friends.forEach(function(friend) { %>
             <li>
-              <a href="/users/<%= user.username %>"><%= user.username %></a>
+              <a href="/users/<%= friend.username %>"><%= friend.username %></a>
             </li>
           <% }) %>
         </ul>
