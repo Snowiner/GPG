@@ -45,6 +45,7 @@ router.get("/:username/checkmsg", function(req, res){
   User.findOne({_id:req.user._id}, function(err, user){
     if(err) return res.json(err);
 
+
     res.render("users/checkmsg", {user:user});
   });
 
