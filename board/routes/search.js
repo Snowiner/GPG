@@ -18,8 +18,8 @@ router.get("/", function(req, res){
 router.post("/", function(req,res){
   var target = req.body.search_target;
   User.find({
-  	username:target
-  })
+  	"name":{$regex:target, $options:"$i"}
+  },{"username":true})
   .sort({username:1})
   .exec(function(err, users){
     if(err) return res.json(err);
