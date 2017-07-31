@@ -39,9 +39,19 @@ router.get("/:username", function(req, res){
   });
 });
 
-//show
+//쪽지 확인창.
 router.get("/:username/checkmsg", function(req, res){
-    res.render("users/checkmsg")
+
+  User.findOne({_id:req.user._id}, function(err, user){
+    if(err) return res.json(err);
+
+    res.render("users/checkmsg", {user:user});
+  });
+
+
+
+
+
 });
 
 //edit
