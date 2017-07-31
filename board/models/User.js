@@ -27,7 +27,12 @@ var userSchema = mongoose.Schema({
    type:String,
    match:[/^[a-zA-Z0-9,_%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/,"Should be a valid email address!"],
    trim:true
- }
+ },
+ message:[{
+  sendFrom:String,
+  content:String,
+  date:{type: Date, default: Date.now}
+}]
 },{
  toObject:{virtuals:true}
 });
