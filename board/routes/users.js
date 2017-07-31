@@ -39,6 +39,11 @@ router.get("/:username", function(req, res){
   });
 });
 
+//show
+router.get("/:username/checkmsg", function(req, res){
+    res.render("users/checkmsg")
+});
+
 //edit
 router.get("/:username/edit", function(req, res){
  var user = req.flash("user")[0];
