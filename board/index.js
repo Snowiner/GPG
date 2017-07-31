@@ -44,6 +44,7 @@ app.use(function(req,res,next){
 app.use("/", require("./routes/home"));
 app.use("/posts", require("./routes/posts"));
 app.use("/users", require("./routes/users"));
+app.use("/search", require("./routes/search"));
 
 //Port setting
 app.listen(3000, function(){
