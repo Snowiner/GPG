@@ -7,6 +7,13 @@ router.get("/", function(req, res){
   res.render("home/welcome");
 });
 
+//addFriend
+router.post("/addFriend",function(req,res){
+  var mID = req.user._id;
+  var fID = req.body.target;
+  res.send(mID+"<br>"+fID)
+});
+
 //login
 router.get("/login", function(req,res){
   var username = req.flash("username")[0];
