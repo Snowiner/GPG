@@ -60,38 +60,34 @@ router.post("/deletemsg",function(req,res){
 
 
 
-  console.log("ㄱㄱㄱㄱㄱ");
+
   var checked = req.body.deleteCheck;
   var user = req.user.username;
 
 
-   checked.forEach( function(checked){
-     console.log(checked);
-   })
   // console.log(checked);
   // console.log(user);
   if(isArray(checked)){
     checked.forEach(function(checked){
 
-      User.update({username:user},{$pull:{message:{content:checked}}},{multi:true});
-    // //   // User.findOneAndUpdate({username:user},{$pull:{message:{date:checked}}}
-    // // ,function(err){
-    // //   if(err)throw err;
-    //
-    // });
+      User.findOneAndUpdate({username:user},{$pull:{"message":{'content':checked}}}
+    ,function(err){
+      if(err)throw err;
+
+
+      });
 
 
   });
   }
   else{
 
-    User.update({},{$pull:{message:{content:checked}}},{multi:true});
-  //   User.findOneAndUpdate({username:user},{$pull:{"message":{date:checked}}}
-  // ,function(err){
-  //   if(err)throw err;
-  //
-  //
-  //   });
+    User.findOneAndUpdate({username:user},{$pull:{"message":{'content':checked}}}
+  ,function(err){
+    if(err)throw err;
+
+
+    });
   }
 
 
