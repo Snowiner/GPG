@@ -68,6 +68,45 @@ router.get("/:username/checkmsg", function(req, res){
 
 });
 
+router.post("/deletemsg",function(req,res){
+
+
+
+
+  var checked = req.body.deleteCheck;
+  var user = req.user.username;
+
+
+  // console.log(checked);
+  // console.log(user);
+  if(isArray(checked)){
+    checked.forEach(function(checked){
+
+      User.findOneAndUpdate({username:user},{$pull:{"message":{'content':checked}}}
+    ,function(err){
+      if(err)throw err;
+
+
+      });
+
+
+  });
+  }
+  else{
+
+    User.findOneAndUpdate({username:user},{$pull:{"message":{'content':checked}}}
+  ,function(err){
+    if(err)throw err;
+
+
+    });
+  }
+
+
+
+  res.redirect("/users/"+user+"/checkmsg");
+});
+
 //edit
 router.get("/:username/edit", function(req, res){
  var user = req.flash("user")[0];
@@ -125,4 +164,8 @@ function parseError(errors){
   parsed.unhandled = JSON.stringify(errors);
 }
 return parsed;
+}
+
+function isArray( val ){
+  return val.constructor.toString().indexOf("Array")> -1;
 }
