@@ -73,7 +73,7 @@ module.exports = function(passport) {
 	passport.use(new FacebookStrategy({
 	    clientID: '317250528715679',
 	    clientSecret: 'a44cae406ceea7acc78ad729b736201f',
-	    callbackURL: 'http://localhost:8080/auth/facebook/callback'
+	    callbackURL: 'http://13.124.201.66:3001/auth/facebook/callback'
 	  },
 	  function(accessToken, refreshToken, profile, done) {
 	    	process.nextTick(function(){
