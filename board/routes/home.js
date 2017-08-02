@@ -3,12 +3,27 @@ var router = express.Router();
 var passport = require("../config/passport");
 var User = require("../models/User");
 var mongoose = require("mongoose");
+var fs = require('fs');
+
 var Schema = mongoose.Schema;
 
 //home
 router.get("/", function(req, res){
   res.render("home/welcome");
 });
+
+router.get("/google594bfaf90762a8d5.html",function(req,res){
+  fs.readFile(`google594bfaf90762a8d5.html`,function(error,data){
+    if(error){
+      console.log(error);
+    }
+    else
+    {
+      res.writeHead(200,{'Content-Type':'text/html'});
+      res.end(data);
+    }
+  })
+})
 
 //addFriend
 router.post("/addFriend",function(req,res){

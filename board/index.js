@@ -52,6 +52,6 @@ app.use("/message", require("./routes/message"));
 app.use("/news", require("./routes/news"));
 
 //Port setting
-app.listen(3000, function(){
+app.listen(80, function(){
   console.log("server on!");
 });

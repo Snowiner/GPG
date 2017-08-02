@@ -73,7 +73,7 @@ module.exports = function(passport) {
 	passport.use(new FacebookStrategy({
 	    clientID: '317250528715679',
 	    clientSecret: 'a44cae406ceea7acc78ad729b736201f',
-	    callbackURL: 'http://localhost:8080/auth/facebook/callback'
+	    callbackURL: 'http://kimanna.tk/auth/facebook/callback'
 	  },
 	  function(accessToken, refreshToken, profile, done) {
 	    	process.nextTick(function(){
