@@ -43,18 +43,18 @@ router.get('/result', function(req, res){
                  var data = JSON.stringify(result);
 
 
-                // data.forEach(function(data){
+                 data.forEach(function(data){
 
                    console.log(data);
 
 
 
-              // });
+               });
 
 
 
 
-                  res.render("news/result",{data:data});
+                //  res.render("news/result",{data:data});
 
                  //res.send(data);
              });
