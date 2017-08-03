@@ -43,21 +43,16 @@ router.get('/result', function(req, res){
                  var data = JSON.stringify(result);
 
 
-                // data.forEach(function(data){
 
-                   //console.log(data);
                    var obj = JSON.parse(data);
                    var arr = obj.rss.channel[0].item;
-                   ////////////
-
-              // });
-
-
-
-
+              
+                  //res.render("news/dummy",{data:arr});
+                  //console.log(arr);
+                  //console.log(arr[0].originallink[0]);
                   res.render("news/result",{data:arr});
-
-                 //res.send(data);
+                  //res.send(arr[0].title[0]);
+                 //res.send(arr);
              });
          });
      });
