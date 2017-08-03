@@ -5,37 +5,35 @@ var bcrypt = require("bcrypt-nodejs");  //1
 var Schema = mongoose.Schema;
 
 // schema // 1
-var userSchema = Schema({
- username:{
-   type:String,
-   required:[true,"Username is required!"],
-   match:[/^.{4,12}$/,"Should be 4-12 characters!"],
-   trim:true,
-   unique:true
- },
- password:{
-   type:String,
-   required:[true,"Password is required!"],
-   select:false
- },
- name:{
-   type:String,
-   required:[true,"Name is required!"],
-   match:[/^.{3,12}$/,"Should be 3-12 characters!"],
-   trim:true
- },
- email:{
-   type:String,
-   match:[/^[a-zA-Z0-9,_%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/,"Should be a valid email address!"],
-   trim:true
- },
- friends:[String],
- message:[{
-  sendFrom:String,
-  content:String,
-  date:{type: Date, default: Date.now}
-}]
-},{
+var userSchema = mongoose.Schema({
+        username:{
+        type:String,
+        trim:true,
+        unique:true
+      },
+      password:{
+        type:String,
+        select:false
+      },
+      name:{
+        type:String,
+        match:[/^.{3,12}$/,"Should be 3-12 characters!"],
+        trim:true
+      },
+      email:{
+        type:String,
+        match:[/^[a-zA-Z0-9,_%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/,"Should be a valid email address!"],
+        trim:true
+      },
+      message:[{
+        sendFrom:String,
+        content:String,
+        date:{type: Date, default: Date.now}
+      }],
+      from: { type: String, defaultTo: 'local' },
+      token: { type: String },
+      friends:[String]
+  },{
  toObject:{virtuals:true}
 });
 
@@ -59,9 +57,10 @@ userSchema.virtual("newPassword")
 // password validation // 3
 var passwordRegex = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/; // 2-1
 var passwordRegexErrorMessage = "Should be minimum 8 characters of alphabet and number combination!"; // 2-2
+
 userSchema.path("password").validate(function(v) {
  var user = this;
-
+/*
  // create user // 3-3
  if(user.isNew){
   if(!user.passwordConfirmation){
@@ -73,7 +72,7 @@ userSchema.path("password").validate(function(v) {
    user.invalidate("passwordConfirmation", "Password Confirmation does not matched!");
   }
  }
-
+*/
  // update user // 3-4
  if(!user.isNew){
   if(!user.currentPassword){
