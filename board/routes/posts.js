@@ -16,19 +16,29 @@ router.get("/", function(req, res){
 
 //new
 router.get("/new", function(req, res){
+  if(req.isAuthenticated())
+  {
+    var author = req.user._id;
+  }
+  else
+  {
+    res.redirect("/login");
+  }
  var post = req.flash("post")[0] || {};
  var errors = req.flash("errors")[0] || {};
- res.render("posts/new", { post:post, errors:errors });
+ res.render("posts/new", { author:author, post:post, errors:errors });
 });
 
 
 //create
-router.post("/", function(req, res){
+router.post("/create", function(req, res){
  Post.create(req.body, function(err, post){
   if(err){
+    res.json(err);
    req.flash("post", req.body);
    req.flash("errors", util.parseError(err));
-   return res.redirect("/posts/new");
+   console.log("post create fail");
+   //return res.redirect("/posts/new");
   }
   res.redirect("/posts");
  });

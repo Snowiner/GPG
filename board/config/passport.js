@@ -1,10 +1,13 @@
 var passport = require("passport");
+var mongoose = require("mongoose");
 var LocalStrategy = require("passport-local").Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require("../models/User");
+
 
 //serialize & deserialize User
 passport.serializeUser(function(user, done){
-  done(null, user.id);
+  done(null, user);
 }); //passport.serializeUser는 login시에 DB에서 발견한 user를 어떻게 session에 저장할지를 정하는 부분. 효율을 위해 user의 id만 session에 저장.
 passport.deserializeUser(function(id, done){
   User.findOne({_id:id}, function(err, user){
@@ -36,4 +39,39 @@ function(req, username, password, done){
 }
 )
 );
+
+passport.use('facebook-login',
+new FacebookStrategy({
+  clientID : '260682471086328',
+  clientSecret : 'eca9128dc07f445a279d072eb78b7128',
+  callbackURL : 'http://kimanna17.tk/facebook/callback'
+},
+function(accessToken, refreshToken, profile, done) {
+  process.nextTick(function() {
+    User.findOne({username:profile.id})
+    .exec(function(err, user) {
+      if (err) return done(err);
+
+      if(user){
+        return done(null, user);
+      } else {
+        var newUser = new User();
+        newUser.username = profile.id;
+        newUser.name = profile.displayName;
+        newUser.token = accessToken;
+        newUser.email = profile.email;
+        newUser.from = 'facebook';
+        newUser.password = '123caute$%^';
+
+        newUser.save(function(err) {
+          if (err) throw err;
+          return done(null, newUser);
+        });
+      }
+    });
+  });
+}));
+
+
+
 module.exports = passport;

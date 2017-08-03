@@ -8,8 +8,8 @@ var fs = require('fs');
 var Schema = mongoose.Schema;
 
 //home
-router.get("/", function(req, res){
-  res.render("home/welcome");
+router.get("/", isLoggedIn, function(req, res){
+  res.render("home/welcome", { user : req.user });
 });
 
 router.get("/google594bfaf90762a8d5.html",function(req,res){
@@ -78,10 +78,28 @@ passport.authenticate("local-login", {
 }
 ));
 
+router.get("/facebook", passport.authenticate("facebook-login", { scope: ['public_profile','email'] }));
+router.get("/facebook/callback",passport.authenticate("facebook-login",{
+  successRedirect : "/",
+  failureRedirect : "/login"
+}
+));
+
 //logout
 router.get("/logout", function(req, res) {
  req.logout();
  res.redirect("/");
 });
 
+
 module.exports = router;
+
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.render("home/welcome");
+}
