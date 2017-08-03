@@ -44,7 +44,7 @@ passport.use('facebook-login',
 new FacebookStrategy({
   clientID : '260682471086328',
   clientSecret : 'eca9128dc07f445a279d072eb78b7128',
-  callbackURL : 'http://localhost:3000/facebook/callback'
+  callbackURL : 'http://kimanna17.tk/facebook/callback'
 },
 function(accessToken, refreshToken, profile, done) {
   process.nextTick(function() {
