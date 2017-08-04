@@ -17,14 +17,11 @@
     "express": "^4.15.3",
     "express-session": "^1.15.5",
     "html": "^1.0.0",
-<<<<<<< HEAD
     "method-override": "^2.3.9",
-    "mongoose": "^4.11.4",
+    "mongoose": "^4.11.5",
     "passport": "^0.3.2",
+    "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
     "xml2js": "^0.4.17"
-=======
-    "mongoose": "^4.7.2"
->>>>>>> 340a162560cc267d336edbcebf9ab12bd52f9f40
   }
 }
