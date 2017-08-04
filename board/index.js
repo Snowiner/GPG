@@ -30,7 +30,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.use(flash());
 app.use(session({secret:"MySecret",
-                store: new MongoStore({mongooseConnection: mongoose.connection})}));  // session은 서버에서 접속자를 구분시키는 역할을 한다. user1과 user2가 웹사이트를 보고 있는 경우
+                store: new MongoStore({mongooseConnection: mongoose.connection,
+                                       ttl: 2 * 24 * 60 * 60})}));  // session은 서버에서 접속자를 구분시키는 역할을 한다. user1과 user2가 웹사이트를 보고 있는 경우
 //해당 유저들을 구분하여 서버에서 필요한 값들을 따로 관리하게 된다. flash에 저장되는 값 역시 user1이 생성한 flash는 user1에게,
 //user2가 생성한 flash는 user2에게 보여져야 하기 때문에 session이 필요하다.
 
