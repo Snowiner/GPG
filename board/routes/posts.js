@@ -19,15 +19,16 @@ router.get("/new", function(req, res){
   if(req.isAuthenticated())
   {
     var author = req.user._id;
+    var post = req.flash("post")[0] || {};
+ var errors = req.flash("errors")[0] || {};
+ res.render("posts/new", { author:author, post:post, errors:errors });
   }
   else
   {
     res.redirect("/login");
   }
- var post = req.flash("post")[0] || {};
- var errors = req.flash("errors")[0] || {};
- res.render("posts/new", { author:author, post:post, errors:errors });
 });
+  
 
 
 //create
@@ -46,11 +47,26 @@ router.post("/create", function(req, res){
 
 //show
 router.get("/:id", function(req, res){
+  if(req.isAuthenticated())
+  {
+    watcher = req.user._id;
+  }
+  else
+  {
+    watcher = 1;
+  }
   Post.findOne({_id:req.params.id})
   .populate("author")
   .exec(function(err, post){
     if(err) return res.json(err);
-    res.render("posts/show", {post:post});
+    if(!post.author) 
+      {
+        res.redirect("/posts");
+      }
+      else
+      {
+        res.render("posts/show", {post:post, watcher:watcher});
+      }
   });
 });
 

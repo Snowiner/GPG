@@ -2,6 +2,7 @@ var passport = require("passport");
 var mongoose = require("mongoose");
 var LocalStrategy = require("passport-local").Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var User = require("../models/User");
 
 
@@ -72,6 +73,37 @@ function(accessToken, refreshToken, profile, done) {
   });
 }));
 
+passport.use('google-login',
+new GoogleStrategy({
+  clientID : '735938911453-c19fhctjdfjivld16tvvnrll4mh15ne8.apps.googleusercontent.com',
+  clientSecret : 'ME6nAecXeQUHHdYUaD4WbAAL',
+  callbackURL : 'http://localhost:80/google/callback'
+},
+function(accessToken, refreshToken, profile, done) {
+  process.nextTick(function() {
+    User.findOne({username:profile.id})
+    .exec(function(err, user) {
+      if (err) return done(err);
+
+      if(user){
+        return done(null, user);
+      } else {
+        var newUser = new User();
+        newUser.username = profile.id;
+        newUser.name = profile.displayName;
+        newUser.token = accessToken;
+        newUser.email = profile.email;
+        newUser.from = 'google';
+        //newUser.password = '123caute$%^';
+
+        newUser.save(function(err) {
+          if (err) throw err;
+          return done(null, newUser);
+        });
+      }
+    });
+  });
+}));
 
 
 module.exports = passport;

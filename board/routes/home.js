@@ -29,8 +29,8 @@ router.get("/google594bfaf90762a8d5.html",function(req,res){
 router.post("/addFriend",function(req,res){
   User.update(
     { _id: req.user._id },
-    { $push: { 
-      friends: 
+    { $push: {
+      friends:
       req.body.targetName
     } },
     function(err,post)
@@ -80,6 +80,13 @@ passport.authenticate("local-login", {
 
 router.get("/facebook", passport.authenticate("facebook-login", { scope: ['public_profile','email'] }));
 router.get("/facebook/callback",passport.authenticate("facebook-login",{
+  successRedirect : "/",
+  failureRedirect : "/login"
+}
+));
+
+router.get("/google", passport.authenticate("google-login", { scope: ['profile','email'] }));
+router.get("/google/callback",passport.authenticate("google-login",{
   successRedirect : "/",
   failureRedirect : "/login"
 }
