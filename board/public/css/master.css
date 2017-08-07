@@ -8,13 +8,17 @@
   display:inline;
 }
 /* home style */
+
 .home h1{
-  color: darkseagreen;
+  color: white;
 }
 .home-login{
   max-width: 330px;
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
+}
+.home p1{
+  font-size: 20px;
 }
 
 /* search style */
