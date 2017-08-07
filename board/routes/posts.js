@@ -49,17 +49,24 @@ router.post("/create", function(req, res){
 router.get("/:id", function(req, res){
   if(req.isAuthenticated())
   {
-    watcher = req.user.username;
+    watcher = req.user._id;
   }
   else
   {
-    watcher = 0;
+    watcher = 1;
   }
   Post.findOne({_id:req.params.id})
   .populate("author")
   .exec(function(err, post){
     if(err) return res.json(err);
-    res.render("posts/show", {post:post, watcher:watcher});
+    if(!post.author) 
+      {
+        res.redirect("/posts");
+      }
+      else
+      {
+        res.render("posts/show", {post:post, watcher:watcher});
+      }
   });
 });
 
