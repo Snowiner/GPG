@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User = require("../models/User");
 
+var empty = require('is-empty');
 
 var https = require('https');
 var querystring = require('querystring');
@@ -14,6 +15,8 @@ router.get('/',function(req,res){
 
 
 router.get('/result', function(req, res){
+
+
 
     var search = req.query.userForm;//검색어 부분.
     var queryOption = {'query':search, 'display':10, 'start':1, 'sort':'sim'};
@@ -46,7 +49,7 @@ router.get('/result', function(req, res){
 
                    var obj = JSON.parse(data);
                    var arr = obj.rss.channel[0].item;
-              
+
                   //res.render("news/dummy",{data:arr});
                   //console.log(arr);
                   //console.log(arr[0].originallink[0]);

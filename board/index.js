@@ -9,6 +9,12 @@ var passport = require("./config/passport");
 var app = express();
 var MongoStore = require('connect-mongo')(session);
 
+process.on('uncaughtException', function (err) {
+    console.log('Caught exception: ' + err);
+
+});
+
+
 //DB setting
 
 mongoose.connect(process.env.MONGO_DB,{useMongoClient: true});
