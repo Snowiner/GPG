@@ -16,8 +16,15 @@ router.get('/',function(req,res){
 
 router.get('/result', function(req, res){
 
+<<<<<<< HEAD
 
 
+=======
+    if(req.query.userForm.length == 0){
+
+      res.render("news/search");
+    }
+>>>>>>> 디자인추가_및_뉴스수정
     var search = req.query.userForm;//검색어 부분.
     var queryOption = {'query':search, 'display':10, 'start':1, 'sort':'sim'};
     var query = querystring.stringify(queryOption);
@@ -45,6 +52,8 @@ router.get('/result', function(req, res){
              parseString(xml, function(err, result){
                  var data = JSON.stringify(result);
 
+
+                // data.forEach(function(data){
 
 
                    var obj = JSON.parse(data);
