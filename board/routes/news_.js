@@ -15,10 +15,7 @@ router.get('/',function(req,res){
   request.get(options , function(err,res,html){
     var $ = cheerio.load(html);
 
-  var data = $(".list_news2 list_allnews[0]").text();
-
-
-      console.log(data);
+      console.log($);
 
   });
 
