@@ -6,7 +6,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 var iconv = require('iconv-lite');
 var options = {
-  url:'http://media.daum.net/breakingnews/digital',
+  url:'http://media.daum.net/breakingnews/digital'
 
 };
 
