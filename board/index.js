@@ -58,7 +58,7 @@ app.use("/posts", require("./routes/posts"));
 app.use("/users", require("./routes/users"));
 app.use("/search", require("./routes/search"));
 app.use("/message", require("./routes/message"));
-app.use("/news_", require("./routes/news"));
+app.use("/news", require("./routes/news"));
 
 
 //Port setting
