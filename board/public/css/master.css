@@ -2,7 +2,10 @@
 .buttons form{
   display: inline-block;
 }
-
+kimanna{
+  margin:0;
+  height:480px;
+}
 .btn-next form{
   width:30px;
   display:inline;
