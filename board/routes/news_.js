@@ -54,7 +54,7 @@ $('.cont_thumb .desc_thumb').each(function( i , elem){
   //   tmp[i].des = $(this).(' .desc_thumb').text();
   // })
 
-   response.render("news/news_",{link:link,title:title,des:des});
+   ress.render("news/news_",{link:link,title:title,des:des});
 
 
 
