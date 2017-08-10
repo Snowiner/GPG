@@ -59,9 +59,10 @@ app.use("/users", require("./routes/users"));
 app.use("/search", require("./routes/search"));
 app.use("/message", require("./routes/message"));
 app.use("/news", require("./routes/news"));
+app.use("/feed", require("./routes/feed"));
 
 
 //Port setting
-app.listen(3000, function(){
+app.listen(80, function(){
   console.log("server on!");
 });

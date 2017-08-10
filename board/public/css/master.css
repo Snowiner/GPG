@@ -12,6 +12,10 @@ kimanna{
 }
 /* home style */
 
+.col-sm-3 {
+}
+
+
 .home h1{
   color: white;
 }
@@ -22,6 +26,9 @@ kimanna{
 }
 .home p1{
   font-size: 20px;
+}
+.carousel{
+  margin-top: 55px;
 }
 
 /* search style */
@@ -36,6 +43,9 @@ kimanna{
   display:block;
 }
 /* post style */
+.post {
+  margin-top: 55px;
+}
 .post h2 {
   color: tomato;
   text-align: center;
@@ -92,7 +102,6 @@ kimanna{
 }
 
 .navbar {
-  margin: 10px 0;
 }
 .navbar-default {
 background-color: #fff;
@@ -121,4 +130,8 @@ padding-top: 8px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.feed-container {
+  margin-top: 55px;
 }
