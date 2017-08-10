@@ -40,27 +40,43 @@ request( url , function( err , response, html){
   des[i] = $(this).text();
 })
 
-
-
- var task = function(){  for( var i=0; i<link.length; i++){
-
-
-    request( link[i] , function( err , response, html){
-
-          var $$ = cheerio.load(html);
-
-          img = $$('.link_figure > img').attr("src");
-
-    });
-
-
-} };
-
-async.series(task, function (err, results) {
-    console.log(img);
-
-});
-  //ress.render("news/news_",{link:link,title:title,des:des,img:img});
+$('img').each(function( i , elem){
+  img[i] = $(this).attr("src")
+})
+//
+//  var tasks =
+//  [
+//    function(callback)
+//    {
+//
+//     link.forEach( function ( link ){
+//           request( link , function( err , response, html)
+//           {
+//
+//             var $$ = cheerio.load(html);
+//             console.log(link.length);
+//             img.push( $$('.link_figure > img').attr("src")  );
+//             if( img.length == 17){
+//               callback();
+//             }
+//
+//           });
+//
+//       });
+//
+//
+//     },
+//     function(callback)
+//     {
+//         ress.render("news/news_",{link:link,title:title,des:des,img:img});
+//     }
+//  ];
+//
+// async.series(tasks, function (err, results) {
+//     console.log(results);
+//
+// });
+   ress.render("news/news_",{link:link,title:title,des:des,img:img});
 
 
 
