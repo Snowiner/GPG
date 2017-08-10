@@ -5,6 +5,7 @@ var User = require("../models/User");
 var cheerio = require('cheerio');
 var request = require('request');
 
+var async = require('async');
 var url = 'http://media.daum.net/breakingnews/digital';
 
 
@@ -28,8 +29,6 @@ request( url , function( err , response, html){
   if( err ){ throw err };
 
   var $ = cheerio.load(html);
-  var arr = $('.cont_thumb .tit_thumb > a').length;
-  var arr_ = $('.desc_thumb').length;
 
 
 
@@ -37,30 +36,36 @@ request( url , function( err , response, html){
     link[i] = $(this).attr("href");
     title[i] = $(this).text();
   })
-$('.cont_thumb .desc_thumb').each(function( i , elem){
+ $('.cont_thumb .desc_thumb').each(function( i , elem){
   des[i] = $(this).text();
 })
 
 
-  //
-  // $('.tit_thumb').forEach(function(data){
-  //   console.log(  data('.link_txt').attr("href"));
-  // });
-  // var tmp = [];
-  //s
-  // $('.cont_thumb').each(function( i , elem){
-  //   tmp[i].title = $(this).(' .tit_thumb').text();
-  //   tmp[i].link = $(this).(' .tit_thumb > a').attr("href");
-  //   tmp[i].des = $(this).(' .desc_thumb').text();
-  // })
 
-   ress.render("news/news_",{link:link,title:title,des:des});
+ var task = function(){  for( var i=0; i<link.length; i++){
+
+
+    request( link[i] , function( err , response, html){
+
+          var $$ = cheerio.load(html);
+
+          img = $$('.link_figure > img').attr("src");
+
+    });
+
+
+} };
+
+async.series(task, function (err, results) {
+    console.log(img);
+
+});
+  //ress.render("news/news_",{link:link,title:title,des:des,img:img});
 
 
 
 
 })
-// ress.render("news/news_",{link:link,title:title,des:des});
 
 });
 
