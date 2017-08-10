@@ -4,7 +4,8 @@ var LocalStrategy = require("passport-local").Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var User = require("../models/User");
-
+var NaverStrategy = require('passport-naver').Strategy;
+var KakaoStrategy = require('passport-kakao').Strategy;
 
 //serialize & deserialize User
 passport.serializeUser(function(user, done){
@@ -45,7 +46,7 @@ passport.use('facebook-login',
 new FacebookStrategy({
   clientID : '260682471086328',
   clientSecret : 'eca9128dc07f445a279d072eb78b7128',
-  callbackURL : 'http://salarian.cf/facebook/callback'
+  callbackURL : 'http://kimanna17.tk/facebook/callback'
 },
 function(accessToken, refreshToken, profile, done) {
   process.nextTick(function() {
@@ -62,6 +63,7 @@ function(accessToken, refreshToken, profile, done) {
         newUser.token = accessToken;
         newUser.email = profile.email;
         newUser.from = 'facebook';
+        newUser.password = '123caute$%^';
 
         newUser.save(function(err) {
           if (err) throw err;
@@ -93,6 +95,7 @@ function(accessToken, refreshToken, profile, done) {
         newUser.token = accessToken;
         newUser.email = profile.email;
         newUser.from = 'google';
+        //newUser.password = '123caute$%^';
 
         newUser.save(function(err) {
           if (err) throw err;
@@ -102,6 +105,67 @@ function(accessToken, refreshToken, profile, done) {
     });
   });
 }));
+
+  passport.use('naver-login',
+  new NaverStrategy({
+    clientID : 'amP5NrxDbUTlFP_7PLUt',
+    clientSecret : 'BSCHs6UXzL',
+    callbackURL : 'http://localhost:80/naver/callback'
+  },
+  function(accessToken, refreshToken, profile, done) {
+    process.nextTick(function() {
+      User.findOne({username:profile.id})
+      .exec(function(err, user) {
+        if (err) return done(err);
+
+        if(user){
+          return done(null, user);
+        } else {
+          var newUser = new User();
+          newUser.username = profile.displayName;
+          newUser.name = profile.displayName;
+          newUser.token = accessToken;
+          newUser.naver = profile._json;
+          //newUser.from = 'naver';
+          newUser.save(function(err) {
+            if (err) throw err;
+            return done(null, newUser);
+          });
+        }
+      });
+    });
+  }));
+
+  passport.use('kakao-login',
+  new KakaoStrategy({
+    clientID : '3603ce231cabc45f2e6e97b87eadaf7c',
+    clientSecret : 'aoD4lATyvzrsR2NyN3OzJjnXCRP6coFu',
+    callbackURL : 'http://localhost:80/kakao/callback'
+  },
+  function(accessToken, refreshToken, profile, done) {
+    process.nextTick(function() {
+      User.findOne({username:profile.id})
+      .exec(function(err, user) {
+        if (err) return done(err);
+
+        if(user){
+          return done(null, user);
+        } else {
+          var newUser = new User();
+          newUser.username = profile.id;
+          newUser.name = profile.username;
+          newUser.token = accessToken;
+          newUser.kakao = profile.json;
+
+
+          newUser.save(function(err) {
+            if (err) throw err;
+            return done(null, newUser);
+          });
+        }
+      });
+    });
+  }));
 
 
 module.exports = passport;

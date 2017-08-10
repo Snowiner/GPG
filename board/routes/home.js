@@ -92,6 +92,19 @@ router.get("/google/callback",passport.authenticate("google-login",{
 }
 ));
 
+router.get("/naver", passport.authenticate("naver-login", { scope: ['naver'] }));
+router.get("/naver/callback",passport.authenticate("naver-login",{
+  successRedirect : "/",
+  failureRedirect : "/login"
+}
+));
+
+router.get("/kakao", passport.authenticate("kakao-login", { scope: ['profile'] }));
+router.get("/kakao/callback",passport.authenticate("kakao-login",{
+  successRedirect : "/",
+  failureRedirect : "/login"
+}
+));
 //logout
 router.get("/logout", function(req, res) {
  req.logout();
