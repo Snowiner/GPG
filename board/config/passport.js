@@ -110,7 +110,7 @@ function(accessToken, refreshToken, profile, done) {
   new NaverStrategy({
     clientID : 'amP5NrxDbUTlFP_7PLUt',
     clientSecret : 'BSCHs6UXzL',
-    callbackURL : 'http://localhost:80/naver/callback'
+    callbackURL : 'http://salarian.cf/naver/callback'
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function() {
@@ -140,7 +140,7 @@ function(accessToken, refreshToken, profile, done) {
   new KakaoStrategy({
     clientID : '3603ce231cabc45f2e6e97b87eadaf7c',
     clientSecret : 'aoD4lATyvzrsR2NyN3OzJjnXCRP6coFu',
-    callbackURL : 'http://localhost:80/kakao/callback'
+    callbackURL : 'http://salarian.cf/kakao/callback'
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function() {
