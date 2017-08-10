@@ -45,7 +45,7 @@ passport.use('facebook-login',
 new FacebookStrategy({
   clientID : '260682471086328',
   clientSecret : 'eca9128dc07f445a279d072eb78b7128',
-  callbackURL : 'http://kimanna17.tk/facebook/callback'
+  callbackURL : 'http://salarian.cf/facebook/callback'
 },
 function(accessToken, refreshToken, profile, done) {
   process.nextTick(function() {
@@ -62,7 +62,6 @@ function(accessToken, refreshToken, profile, done) {
         newUser.token = accessToken;
         newUser.email = profile.email;
         newUser.from = 'facebook';
-        newUser.password = '123caute$%^';
 
         newUser.save(function(err) {
           if (err) throw err;
@@ -77,7 +76,7 @@ passport.use('google-login',
 new GoogleStrategy({
   clientID : '735938911453-c19fhctjdfjivld16tvvnrll4mh15ne8.apps.googleusercontent.com',
   clientSecret : 'ME6nAecXeQUHHdYUaD4WbAAL',
-  callbackURL : 'http://localhost:80/google/callback'
+  callbackURL : 'http://salarian.cf/google/callback'
 },
 function(accessToken, refreshToken, profile, done) {
   process.nextTick(function() {
@@ -94,7 +93,6 @@ function(accessToken, refreshToken, profile, done) {
         newUser.token = accessToken;
         newUser.email = profile.email;
         newUser.from = 'google';
-        //newUser.password = '123caute$%^';
 
         newUser.save(function(err) {
           if (err) throw err;
